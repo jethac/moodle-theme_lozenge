@@ -1,6 +1,8 @@
 <?php
 defined('MOODLE_INTERNAL') || die();
 
+require_once(__DIR__ . '/lib.php');
+
 $THEME->name = 'lozenge';
 $THEME->parents = ['boost'];
 $THEME->sheets = [];
