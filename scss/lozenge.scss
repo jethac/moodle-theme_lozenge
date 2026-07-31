@@ -1,0 +1,273 @@
+// ============================================================
+// theme_lozenge override layer — re-skins Moodle/Boost surfaces
+// through the Lozenge system tokens (engine.scss precedes this),
+// so the runtime axes (contrast/accent/glass, scheme) drive the UI.
+// Token reference: https://lozenge.jethachan.net/docs/
+// ============================================================
+
+// ---- global surfaces & Bootstrap 5 variable bridge ----
+body {
+  --bs-body-bg: var(--lz-sys-surface);
+  --bs-body-color: var(--lz-sys-text);
+  --bs-border-color: var(--lz-sys-border);
+  --bs-secondary-color: var(--lz-sys-text-subtle);
+  --bs-tertiary-bg: var(--lz-sys-surface-sunken);
+  --bs-link-color: var(--lz-sys-link);
+  --bs-link-hover-color: var(--lz-sys-link-hover);
+  background-color: var(--lz-sys-surface);
+  color: var(--lz-sys-text);
+}
+
+a {
+  color: var(--lz-sys-link);
+  &:hover { color: var(--lz-sys-link-hover); }
+}
+
+hr { border-top-color: var(--lz-sys-separator); }
+
+// ---- buttons ----
+.btn-primary {
+  --bs-btn-bg: var(--lz-sys-accent-bold);
+  --bs-btn-border-color: var(--lz-sys-accent-bold);
+  --bs-btn-color: var(--lz-sys-text-on-bold);
+  --bs-btn-hover-bg: var(--lz-sys-accent-bold-hovered);
+  --bs-btn-hover-border-color: var(--lz-sys-accent-bold-hovered);
+  --bs-btn-hover-color: var(--lz-sys-text-on-bold);
+  --bs-btn-active-bg: var(--lz-sys-accent-bold-pressed);
+  --bs-btn-active-border-color: var(--lz-sys-accent-bold-pressed);
+  --bs-btn-active-color: var(--lz-sys-text-on-bold);
+  --bs-btn-disabled-bg: var(--lz-sys-interaction-bg);
+  --bs-btn-disabled-border-color: transparent;
+  --bs-btn-disabled-color: var(--lz-sys-text-disabled);
+}
+
+.btn-secondary,
+.btn-outline-secondary {
+  --bs-btn-bg: var(--lz-sys-interaction-bg);
+  --bs-btn-border-color: transparent;
+  --bs-btn-color: var(--lz-sys-text);
+  --bs-btn-hover-bg: var(--lz-sys-interaction-hovered);
+  --bs-btn-hover-border-color: transparent;
+  --bs-btn-hover-color: var(--lz-sys-text);
+  --bs-btn-active-bg: var(--lz-sys-interaction-pressed);
+  --bs-btn-active-border-color: transparent;
+  --bs-btn-active-color: var(--lz-sys-selected-text);
+}
+
+.btn-danger {
+  --bs-btn-bg: var(--lz-sys-danger-bold);
+  --bs-btn-border-color: var(--lz-sys-danger-bold);
+  --bs-btn-hover-bg: var(--lz-sys-danger-bold-hovered);
+  --bs-btn-hover-border-color: var(--lz-sys-danger-bold-hovered);
+  --bs-btn-active-bg: var(--lz-sys-danger-bold-pressed);
+}
+
+.btn:focus-visible,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 2px var(--lz-sys-focus-ring);
+  border-color: var(--lz-sys-focus-ring);
+}
+
+// ---- cards & content surfaces ----
+.card {
+  --bs-card-bg: var(--lz-sys-surface-raised);
+  --bs-card-border-color: transparent;
+  --bs-card-cap-bg: transparent;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+}
+
+.card-header { border-bottom: 2px solid var(--lz-sys-separator); }
+.card-footer { border-top: 2px solid var(--lz-sys-separator); }
+
+// ---- navbar (glass) ----
+.navbar.fixed-top,
+nav.navbar {
+  background-color: var(--lz-sys-surface) !important;
+  box-shadow: 0 1px 0 var(--lz-sys-separator);
+  border-bottom: none;
+
+  @supports (backdrop-filter: blur(1px)) and (color: oklch(from red l c h / 50%)) {
+    background-color: oklch(from var(--lz-sys-surface) l c h / var(--lz-material-alpha)) !important;
+    backdrop-filter: blur(var(--lz-material-blur)) saturate(var(--lz-material-saturate));
+  }
+}
+
+// ---- Boost drawers (course index / blocks) ----
+.drawer,
+[data-region="fixed-drawer"] {
+  background-color: var(--lz-sys-surface);
+  border-color: var(--lz-sys-separator);
+}
+
+.drawer .drawercontent { background-color: var(--lz-sys-surface); }
+
+[data-region="fixed-drawer"] .list-group-item {
+  background-color: transparent;
+  color: var(--lz-sys-text-subtle);
+  border: none;
+  border-radius: 3px;
+
+  &:hover { background-color: var(--lz-sys-interaction-hovered); color: var(--lz-sys-text); }
+  &.active {
+    background-color: var(--lz-sys-selected-bg);
+    color: var(--lz-sys-selected-text);
+  }
+}
+
+// ---- dropdowns & modals (glass overlays) ----
+.dropdown-menu {
+  --bs-dropdown-bg: var(--lz-sys-surface-overlay);
+  --bs-dropdown-color: var(--lz-sys-text);
+  --bs-dropdown-link-color: var(--lz-sys-text);
+  --bs-dropdown-link-hover-bg: var(--lz-sys-interaction-hovered);
+  --bs-dropdown-link-hover-color: var(--lz-sys-text);
+  --bs-dropdown-link-active-bg: var(--lz-sys-selected-bg);
+  --bs-dropdown-link-active-color: var(--lz-sys-selected-text);
+  --bs-dropdown-border-color: transparent;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px -2px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+
+  @supports (backdrop-filter: blur(1px)) and (color: oklch(from red l c h / 50%)) {
+    background-color: oklch(from var(--lz-sys-surface-overlay) l c h / var(--lz-material-alpha));
+    backdrop-filter: blur(var(--lz-material-blur)) saturate(var(--lz-material-saturate));
+  }
+}
+
+.modal-content {
+  background-color: var(--lz-sys-surface-overlay);
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 1px rgba(9, 30, 66, 0.31);
+}
+
+.modal-backdrop { background-color: var(--lz-sys-blanket); &.show { opacity: 1; } }
+.modal-header { border-bottom: none; }
+.modal-footer { border-top: none; }
+
+// ---- forms ----
+.form-control,
+.form-select {
+  background-color: var(--lz-sys-input-bg);
+  border: 2px solid var(--lz-sys-border);
+  border-radius: 3px;
+  color: var(--lz-sys-text);
+
+  &:hover:not(:focus):not(:disabled) { background-color: var(--lz-sys-input-hover-bg); }
+  &:focus { background-color: var(--lz-sys-surface); }
+  &:disabled { background-color: var(--lz-sys-surface-sunken); border-color: var(--lz-sys-surface-sunken); }
+  &::placeholder { color: var(--lz-sys-text-subtlest); }
+}
+
+.form-check-input:checked {
+  background-color: var(--lz-sys-accent-bold);
+  border-color: var(--lz-sys-accent-bold);
+}
+
+// ---- alerts → Lozenge messages ----
+.alert {
+  border: none;
+  border-radius: 3px;
+  color: var(--lz-sys-text);
+}
+.alert-info      { background-color: var(--lz-sys-status-info-subtle-bg); box-shadow: inset 4px 0 0 var(--lz-sys-status-info-bold-bg); }
+.alert-warning   { background-color: var(--lz-sys-status-warning-subtle-bg); box-shadow: inset 4px 0 0 var(--lz-sys-status-warning-bold-bg); }
+.alert-danger    { background-color: var(--lz-sys-status-danger-subtle-bg); box-shadow: inset 4px 0 0 var(--lz-sys-status-danger-bold-bg); }
+.alert-success   { background-color: var(--lz-sys-status-success-subtle-bg); box-shadow: inset 4px 0 0 var(--lz-sys-status-success-bold-bg); }
+.alert-secondary { background-color: var(--lz-sys-surface-sunken); box-shadow: inset 4px 0 0 var(--lz-sys-status-neutral-bold-bg); }
+
+// ---- badges → lozenges ----
+.badge {
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+
+  &.bg-primary   { background-color: var(--lz-sys-status-info-bold-bg) !important; color: var(--lz-sys-status-info-on-bold); }
+  &.bg-secondary { background-color: var(--lz-sys-status-neutral-subtle-bg) !important; color: var(--lz-sys-status-neutral-subtle-text); }
+  &.bg-success   { background-color: var(--lz-sys-status-success-subtle-bg) !important; color: var(--lz-sys-status-success-subtle-text); }
+  &.bg-danger    { background-color: var(--lz-sys-status-danger-subtle-bg) !important; color: var(--lz-sys-status-danger-subtle-text); }
+  &.bg-warning   { background-color: var(--lz-sys-status-warning-subtle-bg) !important; color: var(--lz-sys-status-warning-subtle-text); }
+  &.bg-info      { background-color: var(--lz-sys-status-info-subtle-bg) !important; color: var(--lz-sys-status-info-subtle-text); }
+}
+
+// ---- tabs ----
+.nav-tabs {
+  border-bottom: none;
+  box-shadow: inset 0 -2px 0 var(--lz-sys-separator);
+
+  .nav-link {
+    border: none;
+    color: var(--lz-sys-text-subtle);
+    font-weight: 500;
+
+    &:hover { color: var(--lz-sys-link-hover); }
+    &.active {
+      background: transparent;
+      color: var(--lz-sys-link);
+      box-shadow: inset 0 -2px 0 var(--lz-sys-link);
+    }
+  }
+}
+
+// ---- tables ----
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--lz-sys-text);
+  --bs-table-border-color: var(--lz-sys-separator);
+
+  thead th {
+    color: var(--lz-sys-text-subtle);
+    font-size: 12px;
+    border-bottom: 2px solid var(--lz-sys-separator);
+  }
+}
+
+// ---- breadcrumbs, pagination, progress ----
+.breadcrumb {
+  background: transparent;
+  .breadcrumb-item a { color: var(--lz-sys-text-subtle); }
+  .breadcrumb-item.active { color: var(--lz-sys-text-subtle); }
+  .breadcrumb-item + .breadcrumb-item::before { color: var(--lz-sys-text-subtlest); }
+}
+
+.page-link {
+  color: var(--lz-sys-text);
+  background-color: transparent;
+  border-color: transparent;
+  border-radius: 3px;
+  &:hover { background-color: var(--lz-sys-interaction-hovered); color: var(--lz-sys-text); }
+}
+.page-item.active .page-link {
+  background-color: var(--lz-sys-selected-bg);
+  color: var(--lz-sys-selected-text);
+  border-color: transparent;
+}
+
+.progress { background-color: var(--lz-sys-track); border-radius: 3px; height: 6px; }
+.progress-bar { background-color: var(--lz-sys-accent-bold); }
+
+// ---- Moodle-specific chrome ----
+#page-header h1, .page-header-headings h1 { color: var(--lz-sys-text); }
+.secondary-navigation { border-bottom: 2px solid var(--lz-sys-separator); }
+.activity-item, .activity-card { border-radius: 3px; }
+.course-content .section .content { color: var(--lz-sys-text); }
+.dashboard-card { background-color: var(--lz-sys-surface-raised); }
+.login-container, .loginform { color: var(--lz-sys-text); }
+#page-login-index #page-wrapper { background-color: var(--lz-sys-surface-sunken); }
+#page-login-index .card { max-width: 480px; }
+footer#page-footer, #page-footer { background-color: var(--lz-sys-surface-sunken); color: var(--lz-sys-text-subtle); }
+
+// ---- a11y guards (mirror the Lozenge a11y layer) ----
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .card, .dropdown-menu, .modal-content, .alert, .badge { border: 1px solid transparent; }
+}
