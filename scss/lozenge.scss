@@ -90,7 +90,7 @@ nav.navbar {
 
   @supports (backdrop-filter: blur(1px)) and (color: oklch(from red l c h / 50%)) {
     background-color: oklch(from var(--lz-sys-surface) l c h / var(--lz-material-alpha)) !important;
-    backdrop-filter: blur(var(--lz-material-blur)) saturate(var(--lz-material-saturate));
+    backdrop-filter: blur(var(--lz-material-blur)) #{'saturate(var(--lz-material-saturate))'};
   }
 }
 
@@ -131,7 +131,7 @@ nav.navbar {
 
   @supports (backdrop-filter: blur(1px)) and (color: oklch(from red l c h / 50%)) {
     background-color: oklch(from var(--lz-sys-surface-overlay) l c h / var(--lz-material-alpha));
-    backdrop-filter: blur(var(--lz-material-blur)) saturate(var(--lz-material-saturate));
+    backdrop-filter: blur(var(--lz-material-blur)) #{'saturate(var(--lz-material-saturate))'};
   }
 }
 
